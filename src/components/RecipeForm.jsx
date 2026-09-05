@@ -4,12 +4,26 @@ const CATEGORIES = ["Breakfast", "Lunch", "Dinner", "Dessert"];
 
 export default function RecipeForm({ onAdd }) {
   // TODO: create controlled state for title, category, and time.
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Breakfast");
+  const [time, setTime] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: reject if title is empty (after .trim()).
+    if (!title.trim()) return;
+
+    // Check if time is positive integer (> 0)
+    const parsedTime = Number(time);
+    if (!time || parsedTime <= 0 || !Number.isInteger(parsedTime)) return;
+
     // TODO: call onAdd({ title, category, time: Number(time) || 0 }).
+    onAdd({ title: title.trim(), category: category || "Breakfast", time: parsedTime });
+
     // TODO: clear the form fields.
+    setTitle("");
+    setCategory("Breakfast");
+    setTime("");
   };
 
   return (
@@ -21,19 +35,33 @@ export default function RecipeForm({ onAdd }) {
       <input
         type="text"
         placeholder="Recipe title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         className="input input-bordered md:col-span-2"
       />
 
       {/* TODO: category dropdown — must be controlled. Map over CATEGORIES for the options. */}
-      <select className="select select-bordered">
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className="select select-bordered"
+      >
         <option value="">Select category</option>
+        {CATEGORIES.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
       </select>
 
       {/* TODO: time input (number) — must be controlled */}
       <input
         type="number"
         placeholder="Time (min)"
-        min="0"
+        min="1"
+        step="1"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
         className="input input-bordered"
       />
 
