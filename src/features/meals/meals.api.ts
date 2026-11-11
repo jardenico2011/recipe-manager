@@ -1,3 +1,4 @@
+
 import { mealdb } from "@/lib/api";
 import type {
   Meal,
@@ -29,6 +30,17 @@ export async function searchMeals(query: string): Promise<Recipe[]> {
   });
 
   return (response.data.meals ?? []).map(toRecipe);
+}
+
+export async function getMealById(
+  mealId: string,
+): Promise<Recipe | null> {
+  const { data } = await mealdb.get<SearchResponse>("/lookup.php", {
+    params: { i: mealId },
+  });
+
+  const [meal] = data.meals ?? [];
+  return meal ? toRecipe(meal) : null;
 }
 
 export async function getCategories(): Promise<string[]> {
