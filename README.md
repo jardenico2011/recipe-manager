@@ -1,4 +1,3 @@
-
 # Recipe Manager
 
 A data-driven recipe management application built with React, TypeScript, Vite, TanStack Query, Axios, Tailwind CSS, and DaisyUI.
@@ -40,7 +39,19 @@ A data-driven recipe management application built with React, TypeScript, Vite, 
 npm install
 ```
 
-3. Create a `.env` file in the project root using `.env.example` as a guide.
+3. Create the `.env` file using `.env.example`:
+
+For Windows:
+
+```cmd
+copy .env.example .env
+```
+
+For macOS/Linux:
+
+```bash
+cp .env.example .env
+```
 
 4. Start the JSON Server in one terminal:
 
