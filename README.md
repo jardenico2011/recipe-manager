@@ -1,3 +1,4 @@
+
 # Recipe Manager
 
 A data-driven recipe management application built with React, TypeScript, Vite, TanStack Query, Axios, Tailwind CSS, and DaisyUI.
@@ -64,7 +65,7 @@ VITE_API_URL=http://localhost:3001
 
 ## Local Database
 
-The `db.json` file contains sample saved recipes. JSON Server provides the local REST API at `http://localhost:3001`.
+The `db.json` file contains four saved recipes. JSON Server provides the local REST API at `http://localhost:3001`.
 
 ## Production Build
 
@@ -77,3 +78,11 @@ npm run build
 ## Notes
 
 This project is developed for PD 2 Major Assessment 2. The application uses TheMealDB for meal data and JSON Server for local recipe storage.
+
+### Query Key Choices
+
+The app uses `["recipes"]` as the query key because all saved recipe data comes from the same JSON Server endpoint. This makes it easy to fetch, update, and refresh saved recipes after mutations. The same key is also used for optimistic favorite updates and rollback to keep the displayed data consistent.
+
+### Rollback Test
+
+The favorite toggle uses optimistic updates. The interface updates immediately when a favorite is clicked. If the API request fails, the previous recipe data is restored using the cached query data.
