@@ -1,27 +1,49 @@
+https://recipe-manager-sable.vercel.app
+
+![Recipe Manager Screenshot](screenshots/rollback-test.png)
+
 # Recipe Manager
 
-A data-driven recipe management application built with React, TypeScript, Vite, TanStack Query, Axios, Tailwind CSS, and DaisyUI.
+A multi-page recipe management application built with React, TypeScript, Vite, and TheMealDB API.
+
+## Live Demo
+
+https://recipe-manager-sable.vercel.app
 
 ## Features
 
 - Search meals using TheMealDB API.
-- View and save recipes.
-- Store saved recipes using JSON Server.
+- View recipe details, ingredients, and images.
+- Save recipes to a personal collection.
+- Sign in using a display name.
+- Protect the saved recipes page from signed-out users.
+- Store saved recipes and login state using browser localStorage.
 - Edit recipe preparation time and notes.
 - Delete saved recipes.
 - Toggle favorite status with optimistic updates and rollback.
 - Filter saved recipes by category.
 - View total recipes and favorite counts.
+- Navigate between pages using React Router.
+- Display a custom 404 page for unknown routes.
+
+## Routes
+
+- `/` — Search recipes.
+- `/login` — Sign in using a display name.
+- `/saved` — Protected saved recipes collection.
+- `/recipe/:mealId` — View recipe details.
+- Other paths — 404 page.
 
 ## Technologies Used
 
 - React 19
 - TypeScript
 - Vite
+- React Router DOM
 - TanStack Query
 - Axios
 - TheMealDB API
-- JSON Server
+- Browser localStorage
 - Tailwind CSS
 - DaisyUI
 
@@ -32,38 +54,27 @@ A data-driven recipe management application built with React, TypeScript, Vite, 
 
 ## Getting Started
 
-1. Clone the repository.
-2. Install dependencies:
+1. Clone the repository:
 
-```bash
-npm install
-```
+   `git clone https://github.com/jardenico2011/recipe-manager.git`
 
-3. Create the `.env` file using `.env.example`:
+2. Open the project folder:
 
-For Windows:
+   `cd recipe-manager`
 
-```cmd
-copy .env.example .env
-```
+3. Install dependencies:
 
-For macOS/Linux:
+   `npm install`
 
-```bash
-cp .env.example .env
-```
+4. Create your `.env` file:
 
-4. Start the JSON Server in one terminal:
+   Windows CMD:
 
-```bash
-npm run api
-```
+   `copy .env.example .env`
 
-5. Start the Vite development server in another terminal:
+5. Start the development server:
 
-```bash
-npm run dev
-```
+   `npm run dev`
 
 6. Open `http://localhost:5173` in your browser.
 
@@ -71,33 +82,24 @@ npm run dev
 
 ```env
 VITE_MEALDB_URL=https://www.themealdb.com/api/json/v1/1
-VITE_API_URL=http://localhost:3001
 ```
 
-## Local Database
+## Data Storage and Authentication
 
-The `db.json` file contains four saved recipes. JSON Server provides the local REST API at `http://localhost:3001`.
+Saved recipes and the demo display name are stored in the browser's localStorage. The login feature demonstrates React context and protected routing. It does not use a backend, passwords, or production-grade authentication.
 
 ## Production Build
 
-Check the TypeScript code and create a production build:
+Run the following command:
 
-```bash
-npm run build
-```
+`npm run build`
 
-## Notes
+## Deployment
 
-This project is developed for PD 2 Major Assessment 2. The application uses TheMealDB for meal data and JSON Server for local recipe storage.
+The application is deployed on Vercel.
 
-### Query Key Choices
+The `vercel.json` rewrite allows users to open nested routes directly and refresh pages without receiving a Vercel 404 error.
 
-The app uses `["recipes"]` as the query key because all saved recipe data comes from the same JSON Server endpoint. This makes it easy to fetch, update, and refresh saved recipes after mutations. The same key is also used for optimistic favorite updates and rollback to keep the displayed data consistent.
+## Project Information
 
-### Rollback Test
-
-The favorite toggle uses optimistic updates. The interface updates immediately when a favorite is clicked. If the API request fails, the previous recipe data is restored using the cached query data.
-
-The screenshot below shows the favorite state immediately after the optimistic update, before the failed request triggers rollback.
-
-![Rollback Test Screenshot](screenshots/rollback-test.png)
+Developed for PD 2 Major Assessment 3.
