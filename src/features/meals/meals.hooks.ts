@@ -1,0 +1,18 @@
+
+import { useQuery } from "@tanstack/react-query";
+import { searchMeals, getCategories } from "./meals.api";
+
+export function useSearchMeals(term: string) {
+  return useQuery({
+    queryKey: ["meals", term],
+    queryFn: () => searchMeals(term),
+    enabled: term.length > 0,
+  });
+}
+
+export function useCategories() {
+  return useQuery({
+    queryKey: ["meal-categories"],
+    queryFn: getCategories,
+  });
+}
