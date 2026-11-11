@@ -86,3 +86,7 @@ The app uses `["recipes"]` as the query key because all saved recipe data comes 
 ### Rollback Test
 
 The favorite toggle uses optimistic updates. The interface updates immediately when a favorite is clicked. If the API request fails, the previous recipe data is restored using the cached query data.
+
+The screenshot below shows the favorite state immediately after the optimistic update, before the failed request triggers rollback.
+
+![Rollback Test Screenshot](screenshots/rollback-test.png)
